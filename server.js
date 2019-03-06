@@ -20,8 +20,8 @@ const item = require('./controllers/item');
 /// --------
 /// Database
 /// --------
-
-const PORT = 3000;
+const herokuPort = process.env.PORT;
+const PORT = herokuPort ? herokuPort : 3000;
 const DATABASE_URL = '';
 
 // Connect to database
