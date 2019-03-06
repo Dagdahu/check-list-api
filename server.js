@@ -22,18 +22,25 @@ const item = require('./controllers/item');
 /// --------
 const herokuPort = process.env.PORT;
 const PORT = herokuPort ? herokuPort : 3000;
-const DATABASE_URL = '';
-
-// Connect to database
-const db = knex({
-    client: 'mysql',
-    connection: {
-    //   connectionString : DATABASE_URL,
+const DATABASE = process.env.DATABASE_HOST ?
+    {
+        host: process.env.DATABASE_HOST,
+        user: process.env.DATABASE_USER,
+        password: process.env.DATABASE_PSWD,
+        database: process.env.DATABASE_NAME
+    }
+    :
+    {
         host: '127.0.0.1',
         user:'checklist_user',
         password:'checklist',
         database: 'check_list'
     }
+
+// Connect to database
+const db = knex({
+    client: 'mysql',
+    connection: DATABASE
 });
 
 // db.select()
